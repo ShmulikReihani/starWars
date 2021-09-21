@@ -1,12 +1,15 @@
 import "./App.css";
 import Planets from "./components/Planets/Planets";
-import VehicleHighest from "./components/VehicleHighest/VehicleHighest";
+import Container from "./components/UI/Container/Container";
+import VehicleInfoTable from "./components/VehicleInfoTable/VehicleInfoTable";
 
 function App() {
   return (
     <div className="App">
-      {/* <VehicleHighest /> */}
-      <Planets />
+      <Container>
+        <VehicleInfoTable />
+        <Planets />
+      </Container>
     </div>
   );
 }

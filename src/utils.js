@@ -1,45 +1,10 @@
 import axios from "axios";
 
-// export const getAllPagesResults = (schemaName) => {
-//   const Next = async (nextUrl, list = []) => {
-//     if (!nextUrl) {
-//       return list;
-//     }
-
-//     let { data } = await axios.get(nextUrl);
-//     const { results, next } = data;
-//     list.push(...results);
-//     return await Next(next, list);
-//   };
-
-//   const url = `https://swapi.dev/api/${schemaName}`;
-//   return Next(url);
-// };
-
-// export const exstractPilotsUrlLisFromVehical = (pilotsURLS) => {
-//   const pilots = [];
-//   pilotsURLS.map((pilotUrl) => {
-//     const fetchData = async () => {
-//       const pilotData = await exstractObjectNameFromUrl(pilotUrl);
-//       pilots.push(pilotData);
-//     };
-//     fetchData();
-//   });
-
-//   return pilots;
-// };
-
-// export const query = async (url) => {
-//     return (await axios.get(url)).data;
-// }
-
-// export const exstractObjectNameFromUrl = async (url) => {
-//     const {}
-//   return (await axios.get(url)).data;
-// };
-
 const apiUrl = "https://swapi.dev/api/";
 
+/**
+ * return all data on a schema like People and go throw all is pages
+ */
 export const getAllPropertyPagesResults = async (schema) => {
   const url = apiUrl + schema;
   let { results, next } = await getPropertySinglePageData(url);
@@ -55,12 +20,17 @@ export const getAllPropertyPagesResults = async (schema) => {
   return allPagesResults;
 };
 
+/**
+ * return all data from a single page
+ */
 export const getPropertySinglePageData = async (url) => {
   let { data } = await axios.get(url);
   let { results, next } = data;
   return { results, next };
 };
-
+/**
+ * return a vehicle name with the highest sum of population for all its pilots’ home planets
+ */
 export const getVehiclesPilotsPlanetsPolulation = async () => {
   let vehiclesInformationSummary = {};
   let vehicles = await getAllPropertyPagesResults("vehicles");
@@ -96,6 +66,9 @@ export const getVehiclesPilotsPlanetsPolulation = async () => {
   return vehiclesInformationSummary;
 };
 
+/**
+ * return a object data from a url api
+ */
 export const getObjectData = async (url) => {
   return (await axios.get(url)).data;
 };
