@@ -1,29 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Bar from "./Bar/Bar";
 
-function Chart({ data }) {
-  const [unitData, setUnitData] = useState({});
+function Chart({ data, height }) {
+  const [unitData, setUnitData] = useState(null);
 
   const measurementData = (list) => {
     const datad = {};
-    const copylist = list;
-    const sorted = copylist.sort((a, b) =>
-      +a.population > +b.population ? 1 : +b.population > +a.population ? -1 : 0
-    );
+    const sorted = [...list].sort((a, b) => +a.population - +b.population);
     for (const item in sorted) {
-      datad[list[item].name] = parseInt(item) + 2;
+      datad[sorted[item].name] = parseInt(item) + 2;
     }
     setUnitData(datad);
   };
 
   useEffect(() => {
     measurementData(data);
-    console.log("unitData", unitData);
-  }, []);
-
-  useEffect(() => {
-    console.log("unitData", unitData);
-  }, [unitData]);
+  }, [data]);
 
   return (
     <div
@@ -33,7 +25,7 @@ function Chart({ data }) {
         justifyContent: "space-evenly",
         width: "50%",
         margin: "0 auto",
-        height: "600px",
+        height: `${height}px`,
       }}
     >
       {data.map((item) => (
@@ -42,8 +34,8 @@ function Chart({ data }) {
           name={item.name}
           population={item.population}
           height={
-            unitData !== 0
-              ? 600 / (unitData[item.name] / (unitData[item.name] - 1))
+            unitData
+              ? height / (unitData[item.name] / (unitData[item.name] - 1))
               : 0
           }
         />

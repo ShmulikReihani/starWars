@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getVehiclesPilotsPlanetsPolulation } from "../../utils";
 import "./VehicleInfoTable.css";
 
@@ -6,17 +6,13 @@ function VehicleInfoTable() {
   const [vehicles, setVehicles] = useState([]);
   const [vehicleInfo, setVehicleInfo] = useState({});
   const [vehicleHighestName, setvehicleHighestName] = useState("");
-  const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
-    const data = await getVehiclesPilotsPlanetsPolulation();
-    console.log(data);
-    setVehicles(data);
+    return await getVehiclesPilotsPlanetsPolulation();
   };
 
   const findVehicleWithMostPopulation = () => {
     let max = 0;
-    console.log("vehicles", vehicles);
     for (let vehicleName in vehicles) {
       const highest = +vehicles[vehicleName].pilotsPopulationSum;
       if (highest > max) {
@@ -25,23 +21,23 @@ function VehicleInfoTable() {
         setvehicleHighestName(vehicleName);
       }
     }
-
-    console.log("vehicleHighest", vehicleInfo);
   };
 
   useEffect(() => {
-    fetchData();
+    fetchData()
+      .then((res) => setVehicles(res))
+      .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
     findVehicleWithMostPopulation();
   }, [vehicles]);
 
-  useEffect(() => {
-    console.log("vehicleHighest", vehicleInfo);
-  }, [vehicleInfo]);
-
-  return (
+  return !vehicleInfo.homePlanetsAndPopulation &&
+    !vehicleInfo.homePlanetsAndPopulation &&
+    !vehicleInfo.vechilePilots ? (
+    <div className="loader">Loading...</div>
+  ) : (
     <div style={{ margin: "0 auto", width: "fit-content" }}>
       <table className="styled-table">
         <thead>
@@ -76,5 +72,4 @@ function VehicleInfoTable() {
     </div>
   );
 }
-
 export default VehicleInfoTable;

@@ -1,30 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { getAllPropertyPagesResults } from "../../utils";
+import { getAllplaentsBySearch } from "../../utils";
+import "./Planets.css";
 
 import Chart from "../Chart/Chart";
 
 function Planets() {
   const [plantes, setPlantes] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const fetchData = async () => {
-    const data = await getAllPropertyPagesResults("planets");
-    return data;
-  };
-
-  const FilterPlanets = (list) => {
-    const planetsFiltered = list.filter(({ name }) =>
-      ["Tatooine", "Alderaan", "Naboo", "Bespin", "Endor"].includes(name)
-    );
-    setPlantes(planetsFiltered);
+  const getFilterPlaents = (list) => {
+    getAllplaentsBySearch(list).then((res) => {
+      setPlantes(res);
+      setLoading(false);
+    });
   };
 
   useEffect(() => {
-    fetchData()
-      .then((res) => FilterPlanets(res))
-      .catch((err) => console.log(err));
+    getFilterPlaents(["Tatooine", "Alderaan", "Naboo", "Bespin", "Endor"]);
   }, []);
 
-  return <Chart data={plantes} height="800" />;
+  return loading ? (
+    <div className="loader">Loading...</div>
+  ) : (
+    <Chart data={plantes} height={600} />
+  );
 }
 
 export default Planets;

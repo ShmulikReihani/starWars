@@ -1,10 +1,4 @@
-import React, { useEffect } from "react";
-
 function Bar({ height, name, population }) {
-  useEffect(() => {
-    console.log("height", height);
-  }, []);
-
   return (
     <div
       style={{

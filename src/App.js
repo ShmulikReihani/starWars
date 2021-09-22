@@ -7,6 +7,16 @@ function App() {
   return (
     <div className="App">
       <Container>
+        <div
+          style={{
+            marginBottom: "45px",
+            fontSize: "45px",
+            color: "lightskyblue",
+            textShadow: "1px 1px grey",
+          }}
+        >
+          TIKAL CODE CHALLENGE - STARWARS
+        </div>
         <VehicleInfoTable />
         <Planets />
       </Container>

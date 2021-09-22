@@ -24,10 +24,26 @@ export const getAllPropertyPagesResults = async (schema) => {
  * return all data from a single page
  */
 export const getPropertySinglePageData = async (url) => {
-  let { data } = await axios.get(url);
-  let { results, next } = data;
+  const { data } = await axios.get(url);
+  const { results, next } = data;
   return { results, next };
 };
+
+export const getSinglePropertyBySearch = async (schemaName, propertySearch) => {
+  const url = apiUrl + schemaName + "?search=" + propertySearch;
+  const { data } = await axios.get(url);
+  const { results } = data;
+  return results[0];
+};
+
+export const getAllplaentsBySearch = async (plaentsNames) => {
+  const planetsPromisesList = plaentsNames.map((planet) =>
+    getSinglePropertyBySearch("planets", planet)
+  );
+  const respones = await Promise.all(planetsPromisesList);
+  return respones;
+};
+
 /**
  * return a vehicle name with the highest sum of population for all its pilots’ home planets
  */
