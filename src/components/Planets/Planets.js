@@ -12,10 +12,12 @@ function Planets() {
    * get resources from plaents schema of plaents names list
    */
   const getPlaentsResourcesByPlaentsNamesList = (list) => {
-    getListOfDataResourcesBySearch(list).then((res) => {
-      setPlantes(res);
-      setLoader(false);
-    });
+    getListOfDataResourcesBySearch(list)
+      .then((res) => {
+        setPlantes(res);
+        setLoader(false);
+      })
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {

@@ -58,16 +58,20 @@ export const getListOfDataResourcesBySearch = async (plaentsNames) => {
 export const getVehiclesPilotsPlanetsPolulation = async () => {
   const vehiclesInformationSummary = {};
   const vehicles = await getAllPropertyPagesResults("vehicles");
+  // go throw of all vehicles
   for (const vehicle of vehicles) {
     const vehicleName = vehicle.name;
     const vechilePilotsUrls = vehicle.pilots;
     let pilotsPopulationSum = 0;
     const homePlanetsAndPopulation = [];
     const vechilePilots = [];
+    // go throw of all vechile Pilots
     for (const pilotUrl of vechilePilotsUrls) {
+      // get request to pilots
       const pilotData = await getObjectData(pilotUrl);
       const pilotName = pilotData.name;
       const pilotHomeWorld = pilotData.homeworld;
+      // get request to planets
       const homeWorldData = await getObjectData(pilotHomeWorld);
       const homeWorldPopuation = homeWorldData.population;
       const homeWorldName = homeWorldData.name;
@@ -79,6 +83,7 @@ export const getVehiclesPilotsPlanetsPolulation = async () => {
       }
     }
 
+    // build a resulte object that containing home planets snd population,pilots population sSum and vechile pilots
     const res = {
       homePlanetsAndPopulation: homePlanetsAndPopulation,
       pilotsPopulationSum: pilotsPopulationSum,
