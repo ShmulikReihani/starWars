@@ -3,7 +3,7 @@ import axios from "axios";
 const apiUrl = "https://swapi.dev/api/";
 
 /**
- * get all the schema resources
+ * get all schema resources
  */
 export const getAllPropertyPagesResults = async (schema) => {
   const url = apiUrl + schema;
@@ -21,7 +21,7 @@ export const getAllPropertyPagesResults = async (schema) => {
 };
 
 /**
- * get all the schema resources from a single page
+ * get all schema resources from a single page
  */
 export const getPropertySinglePageData = async (url) => {
   const { data } = await axios.get(url);
@@ -30,7 +30,7 @@ export const getPropertySinglePageData = async (url) => {
 };
 
 /**
- * get a single data resource by search
+ * get a single resource by search
  */
 export const getSpecificDataResourceBySearch = async (
   schemaName,
@@ -43,7 +43,7 @@ export const getSpecificDataResourceBySearch = async (
 };
 
 /**
- * get list of data resources by search
+ * get list of resources by search
  */
 export const getListOfDataResourcesBySearch = async (plaentsNames) => {
   const planetsPromisesList = plaentsNames.map((planet) =>
@@ -56,8 +56,8 @@ export const getListOfDataResourcesBySearch = async (plaentsNames) => {
  * get a vehicle name with the highest sum of population for all its pilots’ home planets
  */
 export const getVehiclesPilotsPlanetsPolulation = async () => {
-  let vehiclesInformationSummary = {};
-  let vehicles = await getAllPropertyPagesResults("vehicles");
+  const vehiclesInformationSummary = {};
+  const vehicles = await getAllPropertyPagesResults("vehicles");
   for (const vehicle of vehicles) {
     const vehicleName = vehicle.name;
     const vechilePilotsUrls = vehicle.pilots;

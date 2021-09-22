@@ -8,7 +8,10 @@ function Planets() {
   const [plantes, setPlantes] = useState([]);
   const [loader, setLoader] = useState(true);
 
-  const getPlaentsResourcesByPlaentsNames = (list) => {
+  /**
+   * get resources from plaents schema of plaents names list
+   */
+  const getPlaentsResourcesByPlaentsNamesList = (list) => {
     getListOfDataResourcesBySearch(list).then((res) => {
       setPlantes(res);
       setLoader(false);
@@ -16,7 +19,7 @@ function Planets() {
   };
 
   useEffect(() => {
-    getPlaentsResourcesByPlaentsNames([
+    getPlaentsResourcesByPlaentsNamesList([
       "Tatooine",
       "Alderaan",
       "Naboo",

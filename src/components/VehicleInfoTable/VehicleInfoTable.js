@@ -12,6 +12,9 @@ function VehicleInfoTable() {
     return await getVehiclesPilotsPlanetsPolulation();
   };
 
+  /**
+   * go throw vehicles list and find the vehicle with most pilots homeworld population
+   */
   const findVehicleWithMostPopulation = () => {
     let max = 0;
     for (let vehicleName in vehicles) {

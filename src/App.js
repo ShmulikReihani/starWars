@@ -15,7 +15,7 @@ function App() {
             textShadow: "1px 1px grey",
           }}
         >
-          TIKAL CODE CHALLENGE - STARWARS
+          TIKAL CODE CHALLENGE - STAR WARS
         </div>
         <VehicleInfoTable />
         <Planets />
