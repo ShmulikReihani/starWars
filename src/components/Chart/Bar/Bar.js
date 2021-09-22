@@ -8,7 +8,9 @@ function Bar({ height, name, population }) {
         justifyContent: "flex-end",
       }}
     >
-      <div style={{ marginBottom: "15px" }}>{population}</div>
+      <div style={{ marginBottom: "15px", fontSize: "small" }}>
+        {population}
+      </div>
       <div
         style={{
           height: height,
