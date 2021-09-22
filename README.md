@@ -7,10 +7,6 @@ means to query data about films, characters, planets, vehicles, etc.
 To develop this project I used React.js, and also deployed it to Heroku.
 [Star Wars Tikal Challenge - Heroku](https://star-wars-tikal.herokuapp.com/)
 
-### Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Available Scripts
 
 In the project directory, you can run:
