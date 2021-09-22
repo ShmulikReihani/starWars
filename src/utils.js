@@ -3,7 +3,7 @@ import axios from "axios";
 const apiUrl = "https://swapi.dev/api/";
 
 /**
- * return all data on a schema like People and go throw all is pages
+ * get all the schema resources
  */
 export const getAllPropertyPagesResults = async (schema) => {
   const url = apiUrl + schema;
@@ -21,7 +21,7 @@ export const getAllPropertyPagesResults = async (schema) => {
 };
 
 /**
- * return all data from a single page
+ * get all the schema resources from a single page
  */
 export const getPropertySinglePageData = async (url) => {
   const { data } = await axios.get(url);
@@ -29,23 +29,31 @@ export const getPropertySinglePageData = async (url) => {
   return { results, next };
 };
 
-export const getSinglePropertyBySearch = async (schemaName, propertySearch) => {
+/**
+ * get a single data resource by search
+ */
+export const getSpecificDataResourceBySearch = async (
+  schemaName,
+  propertySearch
+) => {
   const url = apiUrl + schemaName + "?search=" + propertySearch;
   const { data } = await axios.get(url);
   const { results } = data;
   return results[0];
 };
 
-export const getAllplaentsBySearch = async (plaentsNames) => {
+/**
+ * get list of data resources by search
+ */
+export const getListOfDataResourcesBySearch = async (plaentsNames) => {
   const planetsPromisesList = plaentsNames.map((planet) =>
-    getSinglePropertyBySearch("planets", planet)
+    getSpecificDataResourceBySearch("planets", planet)
   );
-  const respones = await Promise.all(planetsPromisesList);
-  return respones;
+  return await Promise.all(planetsPromisesList);
 };
 
 /**
- * return a vehicle name with the highest sum of population for all its pilots’ home planets
+ * get a vehicle name with the highest sum of population for all its pilots’ home planets
  */
 export const getVehiclesPilotsPlanetsPolulation = async () => {
   let vehiclesInformationSummary = {};
@@ -83,7 +91,7 @@ export const getVehiclesPilotsPlanetsPolulation = async () => {
 };
 
 /**
- * return a object data from a url api
+ * get a single resource
  */
 export const getObjectData = async (url) => {
   return (await axios.get(url)).data;

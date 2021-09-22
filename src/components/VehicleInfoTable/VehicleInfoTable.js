@@ -5,7 +5,8 @@ import "./VehicleInfoTable.css";
 function VehicleInfoTable() {
   const [vehicles, setVehicles] = useState([]);
   const [vehicleInfo, setVehicleInfo] = useState({});
-  const [vehicleHighestName, setvehicleHighestName] = useState("");
+  const [vehicleWithMostPopulationName, setVehicleWithMostPopulationName] =
+    useState("");
 
   const fetchData = async () => {
     return await getVehiclesPilotsPlanetsPolulation();
@@ -18,7 +19,7 @@ function VehicleInfoTable() {
       if (highest > max) {
         max = highest;
         setVehicleInfo(vehicles[vehicleName]);
-        setvehicleHighestName(vehicleName);
+        setVehicleWithMostPopulationName(vehicleName);
       }
     }
   };
@@ -43,28 +44,21 @@ function VehicleInfoTable() {
         <thead>
           <tr>
             <th>Vehicle Name</th>
-            <th>HomeWorld Name & Popuation</th>
+            <th>Homeworld Name & Popuation</th>
             <th>Related Pilot Names</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>{vehicleHighestName}</td>
+            <td>{vehicleWithMostPopulationName}</td>
             <td>
-              {vehicleInfo && vehicleInfo.homePlanetsAndPopulation
-                ? vehicleInfo.homePlanetsAndPopulation[0].homeWorldName
-                : null}{" "}
-              :
-              {vehicleInfo && vehicleInfo.homePlanetsAndPopulation
-                ? vehicleInfo.homePlanetsAndPopulation[0].homeWorldPopuation
-                : null}
+              {vehicleInfo.homePlanetsAndPopulation[0].homeWorldName}:
+              {vehicleInfo.homePlanetsAndPopulation[0].homeWorldPopuation}
             </td>
             <td>
-              {vehicleInfo && vehicleInfo.vechilePilots
-                ? vehicleInfo.vechilePilots.map((pilot) => (
-                    <div key={pilot}>{pilot}</div>
-                  ))
-                : null}
+              {vehicleInfo.vechilePilots.map((pilot) => (
+                <div key={pilot}>{pilot}</div>
+              ))}
             </td>
           </tr>
         </tbody>

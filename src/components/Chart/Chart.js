@@ -2,19 +2,19 @@ import React, { useEffect, useState } from "react";
 import Bar from "./Bar/Bar";
 
 function Chart({ data, height }) {
-  const [unitData, setUnitData] = useState(null);
+  const [unitDataObject, setUnitDataObject] = useState(null);
 
-  const measurementData = (list) => {
-    const datad = {};
+  const measurementDataByPopulationNumber = (list) => {
+    const objectOfUnitDataMeasurement = {};
     const sorted = [...list].sort((a, b) => +a.population - +b.population);
     for (const item in sorted) {
-      datad[sorted[item].name] = parseInt(item) + 2;
+      objectOfUnitDataMeasurement[sorted[item].name] = parseInt(item) + 2;
     }
-    setUnitData(datad);
+    setUnitDataObject(objectOfUnitDataMeasurement);
   };
 
   useEffect(() => {
-    measurementData(data);
+    measurementDataByPopulationNumber(data);
   }, [data]);
 
   return (
@@ -34,8 +34,9 @@ function Chart({ data, height }) {
           name={item.name}
           population={item.population}
           height={
-            unitData
-              ? height / (unitData[item.name] / (unitData[item.name] - 1))
+            unitDataObject
+              ? height /
+                (unitDataObject[item.name] / (unitDataObject[item.name] - 1))
               : 0
           }
         />
